@@ -1,74 +1,226 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import React, { useState, useEffect, useRef } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  KeyboardAvoidingView,
+  Switch,
+} from "react-native";
+import axios from "axios";
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+export default function App() {
+  const [messages, setMessages] = useState([]);
+  const [userInput, setUserInput] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const stopTypingRef = useRef(false);
+  const typingTimeoutRef = useRef(null);
 
-export default function HomeScreen() {
+  const sendMessage = async () => {
+    if (!userInput.trim()) return;
+
+    const userMessage = { text: userInput, sender: "user" };
+    setMessages([...messages, userMessage]);
+
+    setIsTyping(true);
+    stopTypingRef.current = false;
+
+    try {
+      const response = await axios.post("http://localhost:5000/chat", {
+        question: userInput,
+      });
+
+      const botReply = response.data.reply;
+      typeBotMessage(botReply);
+    } catch (error) {
+      console.error("Error connecting to the backend:", error);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { text: "Error communicating with the server.", sender: "bot" },
+      ]);
+      setIsTyping(false);
+    }
+
+    setUserInput("");
+  };
+
+  const typeBotMessage = (message) => {
+    let currentText = "";
+    const interval = 15;
+    let index = 0;
+
+    const typeCharacter = () => {
+      if (stopTypingRef.current) {
+        clearTimeout(typingTimeoutRef.current);
+        setIsTyping(false);
+        return;
+      }
+
+      if (index < message.length) {
+        currentText += message[index];
+        setMessages((prevMessages) => [
+          ...prevMessages.slice(0, -1),
+          { text: currentText, sender: "bot" },
+        ]);
+        index++;
+        typingTimeoutRef.current = setTimeout(typeCharacter, interval);
+      } else {
+        setIsTyping(false);
+      }
+    };
+
+    typeCharacter();
+  };
+
+  const clearChat = () => {
+    setMessages([]);
+  };
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <View
+        style={[
+          styles.chatContainer,
+          isDarkMode && styles.darkChatContainer,
+        ]}
+      >
+        <FlatList
+          data={messages}
+          keyExtractor={(_, index) => index.toString()}
+          renderItem={({ item }) => (
+            <Text
+              style={[
+                styles.message,
+                item.sender === "user"
+                  ? styles.userMessage
+                  : styles.botMessage,
+              ]}
+            >
+              {item.text}
+            </Text>
+          )}
+          contentContainerStyle={styles.chatBox}
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+        {isTyping && <Text style={styles.typingIndicator}>Typing...</Text>}
+      </View>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={[styles.input, isDarkMode && styles.darkInput]}
+          placeholder="Ask something..."
+          placeholderTextColor={isDarkMode ? "#888" : "#ccc"}
+          value={userInput}
+          onChangeText={setUserInput}
+          onSubmitEditing={sendMessage}
+        />
+        <TouchableOpacity onPress={sendMessage} style={styles.sendButton}>
+          <Text style={styles.sendButtonText}>Send</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={clearChat} style={styles.clearButton}>
+          <Text style={styles.clearButtonText}>Clear</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.footer}>
+        <Text style={styles.footerText}>Dark Mode</Text>
+        <Switch
+          value={isDarkMode}
+          onValueChange={toggleDarkMode}
+          thumbColor={isDarkMode ? "#444" : "#ccc"}
+        />
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
+    backgroundColor: "#f5f5f5",
+    paddingTop: 50,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  chatContainer: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: "#fff",
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  darkChatContainer: {
+    backgroundColor: "#121212",
+  },
+  chatBox: {
+    flexGrow: 1,
+    justifyContent: "flex-end",
+  },
+  message: {
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 10,
+  },
+  userMessage: {
+    alignSelf: "flex-end",
+    backgroundColor: "#0084ff",
+    color: "#fff",
+  },
+  botMessage: {
+    alignSelf: "flex-start",
+    backgroundColor: "#e5e5ea",
+    color: "#000",
+  },
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    backgroundColor: "#fff",
+  },
+  input: {
+    flex: 1,
+    height: 40,
+    paddingHorizontal: 10,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    borderRadius: 5,
+  },
+  darkInput: {
+    backgroundColor: "#222",
+    color: "#fff",
+    borderColor: "#444",
+  },
+  sendButton: {
+    marginLeft: 10,
+    backgroundColor: "#0084ff",
+    padding: 10,
+    borderRadius: 5,
+  },
+  sendButtonText: {
+    color: "#fff",
+  },
+  clearButton: {
+    marginLeft: 10,
+    backgroundColor: "#f44336",
+    padding: 10,
+    borderRadius: 5,
+  },
+  clearButtonText: {
+    color: "#fff",
+  },
+  typingIndicator: {
+    color: "#888",
+    fontStyle: "italic",
+    marginVertical: 5,
+  },
+  footer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 10,
+  },
+  footerText: {
+    color: "#444",
   },
 });
