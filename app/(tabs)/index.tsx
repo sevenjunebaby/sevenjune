@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+
+
 import {
   StyleSheet,
   Text,
@@ -12,12 +14,13 @@ import {
 import axios from "axios";
 
 export default function App() {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<{ text: string; sender: string }[]>([]);
   const [userInput, setUserInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const stopTypingRef = useRef(false);
-  const typingTimeoutRef = useRef(null);
+  const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
 
   const sendMessage = async () => {
     if (!userInput.trim()) return;
@@ -47,13 +50,13 @@ export default function App() {
     setUserInput("");
   };
 
-  const typeBotMessage = (message) => {
+  const typeBotMessage = (message: string) => {
     let currentText = "";
     const interval = 15;
     let index = 0;
 
     const typeCharacter = () => {
-      if (stopTypingRef.current) {
+      if (typingTimeoutRef.current) {
         clearTimeout(typingTimeoutRef.current);
         setIsTyping(false);
         return;
