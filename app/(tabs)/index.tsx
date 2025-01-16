@@ -228,9 +228,9 @@ const styles = StyleSheet.create({
   clearButton: {
     marginLeft: 5,
     backgroundColor: "transparent",
-    
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 10,
+    cursor: "pointer",
   },
   clearButtonText: {
     color: "#fff",
