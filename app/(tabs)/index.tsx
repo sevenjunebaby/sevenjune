@@ -12,6 +12,7 @@ import {
   Switch,
 } from "react-native";
 import axios from "axios";
+import { black } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
 
 export default function App() {
   const [messages, setMessages] = useState<{ text: string; sender: string }[]>([]);
@@ -87,58 +88,67 @@ export default function App() {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <View
-        style={[
-          styles.chatContainer,
-          isDarkMode && styles.darkChatContainer,
-        ]}
-      >
-        <FlatList
-          data={messages}
-          keyExtractor={(_, index) => index.toString()}
-          renderItem={({ item }) => (
-            <Text
-              style={[
-                styles.message,
-                item.sender === "user"
-                  ? styles.userMessage
-                  : styles.botMessage,
-              ]}
-            >
-              {item.text}
-            </Text>
-          )}
-          contentContainerStyle={styles.chatBox}
-        />
-        {isTyping && <Text style={styles.typingIndicator}>Typing...</Text>}
-      </View>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={[styles.input, isDarkMode && styles.darkInput]}
-          placeholder="Ask something..."
-          placeholderTextColor={isDarkMode ? "#888" : "#ccc"}
-          value={userInput}
-          onChangeText={setUserInput}
-          onSubmitEditing={sendMessage}
-        />
-        <TouchableOpacity onPress={sendMessage} style={styles.sendButton}>
-          <Text style={styles.sendButtonText}>Send</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={clearChat} style={styles.clearButton}>
-          <Text style={styles.clearButtonText}>Clear</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>Dark Mode</Text>
-        <Switch
-          value={isDarkMode}
-          onValueChange={toggleDarkMode}
-          thumbColor={isDarkMode ? "#444" : "#ccc"}
-        />
-      </View>
-    </KeyboardAvoidingView>
-  );
+    
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
+        {/* Top-left buttons container */}
+        <View style={styles.topButtons}>
+          <TouchableOpacity onPress={clearChat} style={styles.clearButton}>
+            <Text style={styles.clearButtonText}>Clear</Text>
+          </TouchableOpacity>
+          <View style={styles.darkModeContainer}>
+            <Text style={styles.footerText}></Text>
+            <Switch
+              value={isDarkMode}
+              onValueChange={toggleDarkMode}
+              thumbColor={isDarkMode ? "#444" : "#ccc"}
+            />
+          </View>
+        </View>
+    
+        {/* Chat container */}
+        <View
+          style={[
+            styles.chatContainer,
+            isDarkMode && styles.darkChatContainer,
+          ]}
+        >
+          <FlatList
+            data={messages}
+            keyExtractor={(_, index) => index.toString()}
+            renderItem={({ item }) => (
+              <Text
+                style={[
+                  styles.message,
+                  item.sender === "user"
+                    ? styles.userMessage
+                    : styles.botMessage,
+                ]}
+              >
+                {item.text}
+              </Text>
+            )}
+            contentContainerStyle={styles.chatBox}
+          />
+          {isTyping && <Text style={styles.typingIndicator}>Typing...</Text>}
+        </View>
+    
+        {/* Input container */}
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={[styles.input, isDarkMode && styles.darkInput]}
+            placeholder="Ask something..."
+            placeholderTextColor={isDarkMode ? "#888" : "#ccc"}
+            value={userInput}
+            onChangeText={setUserInput}
+            onSubmitEditing={sendMessage}
+          />
+          <TouchableOpacity onPress={sendMessage} style={styles.sendButton}>
+            <Text style={styles.sendButtonText}>Send</Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
+    );
+    
 }
 
 const styles = StyleSheet.create({
@@ -150,10 +160,17 @@ const styles = StyleSheet.create({
   chatContainer: {
     flex: 1,
     padding: 10,
-    backgroundColor: "#fff",
+    backgroundColor: "#fff", // Light mode background color
   },
   darkChatContainer: {
-    backgroundColor: "#121212",
+    backgroundColor: "#121212", // Dark mode background color
+  },
+  topButtons: {
+    flexDirection: "row",
+    justifyContent: "flex-start", // Align buttons to the left
+    alignItems: "center",
+    padding: 10,
+    backgroundColor: "#f5f5f5", // Matches container background
   },
   chatBox: {
     flexGrow: 1,
@@ -194,6 +211,11 @@ const styles = StyleSheet.create({
     color: "#fff",
     borderColor: "#444",
   },
+  darkModeContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginLeft: 5,
+  },
   sendButton: {
     marginLeft: 10,
     backgroundColor: "#0084ff",
@@ -204,8 +226,9 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   clearButton: {
-    marginLeft: 10,
-    backgroundColor: "#f44336",
+    marginLeft: 5,
+    backgroundColor: "transparent",
+    
     padding: 10,
     borderRadius: 5,
   },
