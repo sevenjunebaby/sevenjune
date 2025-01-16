@@ -218,12 +218,12 @@ const styles = StyleSheet.create({
   },
   sendButton: {
     marginLeft: 10,
-    backgroundColor: "#0084ff",
+    backgroundColor: "transparent",
     padding: 10,
     borderRadius: 5,
   },
   sendButtonText: {
-    color: "#fff",
+    color: "#888",
   },
   clearButton: {
     marginLeft: 5,
@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
     cursor: "pointer",
   },
   clearButtonText: {
-    color: "#fff",
+    color: "#888",
   },
   typingIndicator: {
     color: "#888",
