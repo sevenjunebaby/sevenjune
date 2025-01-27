@@ -97,6 +97,10 @@ export default function App() {
             style={styles.clearButtonImage}
           />
         </TouchableOpacity>
+
+
+
+        
         <View style={styles.darkModeContainer}>
           <TouchableOpacity onPress={toggleDarkMode} style={styles.header}>
           <Image
@@ -270,15 +274,12 @@ const styles = StyleSheet.create({
   },
   footerText: {
     color: "#444",
-    textAlign : "center",
-    alignItems : "center",
-    justifyContent : "center",
-    display : "flex",
+    
     
   },
   darkFooterText: {
     color: "#ccc",
-    display : "flex",
+    
   },
 
   darkFooter: {
