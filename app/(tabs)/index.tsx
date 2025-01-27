@@ -98,7 +98,11 @@ export default function App() {
           />
         </TouchableOpacity>
         <View style={styles.darkModeContainer}>
-          <TouchableOpacity onPress={toggleDarkMode}>
+          <TouchableOpacity onPress={toggleDarkMode} style={styles.header}>
+          <Image
+            source={require("/home/7june/AndroidStudioProjects/sevenjune/sevenjune/assets/images/dark.png")}
+            style={styles.clearButtonImage}
+          />
             <Text style={[styles.footerText, isDarkMode && styles.darkFooterText]}>7 JUNE</Text>
           </TouchableOpacity>
         </View>
@@ -181,6 +185,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   container: {
+    
     flex: 1,
     backgroundColor: "transparent",
     paddingTop: 50,
@@ -194,7 +199,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   darkChatContainer: {
-    backgroundColor: "#1e1e1e",
+    backgroundColor: "#121212",
   },
   topButtons: {
     flexDirection: "row",
@@ -230,7 +235,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   darkInputContainer: {
-    backgroundColor: "#222",
+    backgroundColor: "#121212",
   },
   input: {
     flex: 1,
@@ -246,9 +251,11 @@ const styles = StyleSheet.create({
     borderColor: "#444",
   },
   darkModeContainer: {
-    flexDirection: "row",
+    display: "flex",
     alignItems: "center",
     marginLeft: 5,
+    
+  
   },
   sendButton: {
     marginLeft: 10,
@@ -270,10 +277,12 @@ const styles = StyleSheet.create({
   },
   darkFooterText: {
     color: "#ccc",
+    display : "flex",
   },
 
   darkFooter: {
     backgroundColor: "#121212",
+    
   },
   footer: {
     flexDirection: "row",
@@ -281,7 +290,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#f5f5f5",
     justifyContent: "space-between",
     padding: 10,
+    
   },
 
-
+  header :{
+    display : "flex",
+  }
 });
