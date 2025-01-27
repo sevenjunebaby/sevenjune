@@ -273,6 +273,7 @@ const styles = StyleSheet.create({
     textAlign : "center",
     alignItems : "center",
     justifyContent : "center",
+    display : "flex",
     
   },
   darkFooterText: {
@@ -285,6 +286,7 @@ const styles = StyleSheet.create({
     
   },
   footer: {
+    display : "flex",
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#f5f5f5",
