@@ -13,7 +13,7 @@ import {
   Image,
 } from "react-native";
 import axios from "axios";
-import { black } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
+import { black, transparent ,white } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
 
 export default function App() {
   const [messages, setMessages] = useState<{ text: string; sender: string }[]>([]);
@@ -95,7 +95,7 @@ export default function App() {
         <View style={styles.topButtons}>
           <TouchableOpacity onPress={clearChat} style={styles.clearButton}>
           <Image 
-          source={require('./')} // Replace with the actual path to your image
+          source={require('/home/7june/AndroidStudioProjects/sevenjune/sevenjune/assets/images/clear.png')} // Replace with the actual path to your image
           style={styles.clearButtonImage} 
         />
 
@@ -268,8 +268,10 @@ const styles = StyleSheet.create({
   footer: {
     flexDirection: "row",
     alignItems: "center",
+    backgroundColor: "transparent",
     justifyContent: "space-between",
     padding: 10,
+  
   },
   footerText: {
     color: "#444",
