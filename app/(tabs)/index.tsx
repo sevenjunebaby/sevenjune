@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-
-
 import {
   StyleSheet,
   Text,
@@ -13,7 +11,6 @@ import {
   Image,
 } from "react-native";
 import axios from "axios";
-import { black, transparent ,white } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
 
 export default function App() {
   const [messages, setMessages] = useState<{ text: string; sender: string }[]>([]);
@@ -89,113 +86,122 @@ export default function App() {
   };
 
   return (
-    
-      <KeyboardAvoidingView style={styles.container} behavior="padding">
-     
-        <View style={styles.topButtons}>
-          <TouchableOpacity onPress={clearChat} style={styles.clearButton}>
-          <Image 
-          source={require('/home/7june/AndroidStudioProjects/sevenjune/sevenjune/assets/images/clear.png')} // Replace with the actual path to your image
-          style={styles.clearButtonImage} 
-        />
-
-
-            
-          </TouchableOpacity>
-          <View style={styles.darkModeContainer} >
-            <Text style={styles.footerText}>7 JUNE</Text>
-            <Switch
-              value={isDarkMode}
-              onValueChange={toggleDarkMode}
-              thumbColor={isDarkMode ? "#444" : "#ccc"}
-            />
-          </View>
-        </View>
-    
-        {/* Chat container */}
-        <View
-          style={[
-            styles.chatContainer,
-            isDarkMode && styles.darkChatContainer,
-          ]}
-        >
-          <FlatList
-            data={messages}
-            keyExtractor={(_, index) => index.toString()}
-            renderItem={({ item }) => (
-              <Text
-                style={[
-                  styles.message,
-                  item.sender === "user"
-                    ? styles.userMessage
-                    : styles.botMessage,
-                ]}
-              >
-                {item.text}
-              </Text>
-            )}
-            contentContainerStyle={styles.chatBox}
+    <KeyboardAvoidingView
+      style={[styles.container, isDarkMode && styles.darkContainer]}
+      behavior="padding"
+    >
+      <View style={styles.topButtons}>
+        <TouchableOpacity onPress={clearChat} style={styles.clearButton}>
+          <Image
+            source={require("/home/7june/AndroidStudioProjects/sevenjune/sevenjune/assets/images/clear.png")}
+            style={styles.clearButtonImage}
           />
-          {isTyping && <Text style={styles.typingIndicator}>Typing...</Text>}
-        </View>
-    
-        {/* Input container */}
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={[styles.input, isDarkMode && styles.darkInput]}
-            placeholder="Ask something..."
-            placeholderTextColor={isDarkMode ? "#888" : "#ccc"}
-            value={userInput}
-            onChangeText={setUserInput}
-            onSubmitEditing={sendMessage}
-          />
-          <TouchableOpacity onPress={sendMessage} style={styles.sendButton}>
-
-
-          <Image 
-          source={require('/home/7june/AndroidStudioProjects/sevenjune/sevenjune/assets/images/send.png')} // Replace with the actual path to your image
-          style={styles.sendButtonImage} 
-        />
-
+        </TouchableOpacity>
+        <View style={styles.darkModeContainer}>
+          <TouchableOpacity onPress={toggleDarkMode}>
+            <Text style={[styles.footerText, isDarkMode && styles.darkFooterText]}>7 JUNE</Text>
           </TouchableOpacity>
         </View>
-      </KeyboardAvoidingView>
-    );
-    
+      </View>
+
+      <View
+        style={[
+          styles.chatContainer,
+          isDarkMode && styles.darkChatContainer,
+        ]}
+      >
+        <FlatList
+          data={messages}
+          keyExtractor={(_, index) => index.toString()}
+          renderItem={({ item }) => (
+            <Text
+              style={[
+                styles.message,
+                item.sender === "user"
+                  ? styles.userMessage
+                  : styles.botMessage,
+              ]}
+            >
+              {item.text}
+            </Text>
+          )}
+          contentContainerStyle={styles.chatBox}
+        />
+        {isTyping && <Text style={styles.typingIndicator}>Typing...</Text>}
+      </View>
+
+      <View
+        style={[
+          styles.inputContainer,
+          isDarkMode && styles.darkInputContainer,
+        ]}
+      >
+        <TextInput
+          style={[styles.input, isDarkMode && styles.darkInput]}
+          placeholder="Ask something..."
+          placeholderTextColor={isDarkMode ? "#888" : "#ccc"}
+          value={userInput}
+          onChangeText={setUserInput}
+          onSubmitEditing={sendMessage}
+        />
+        <TouchableOpacity onPress={sendMessage} style={styles.sendButton}>
+          <Image
+            source={require("/home/7june/AndroidStudioProjects/sevenjune/sevenjune/assets/images/send.png")}
+            style={styles.sendButtonImage}
+          />
+        </TouchableOpacity>
+      </View>
+      <View style={[styles.footer, isDarkMode && styles.darkFooter]}>
+        <Text style={[styles.footerText, isDarkMode && styles.darkFooterText]}>
+        &copy; 2025 seven june. All rights reserved.
+        </Text>
+      </View>
+    </KeyboardAvoidingView>
+  );
 }
 
 const styles = StyleSheet.create({
-  sendButtonImage :{
-    width: 24, 
-    height: 24, 
-    resizeMode: 'contain', 
-
+  sendButtonImage: {
+    width: 24,
+    height: 24,
+    resizeMode: "contain",
   },
-  clearButtonImage :{
-    width: 24, 
-    height: 24, 
-    resizeMode: 'contain', 
+  clearButtonImage: {
+    width: 24,
+    height: 24,
+    resizeMode: "contain",
+  },
+  clearButton: {
+   
+    marginLeft: 10,
+    backgroundColor: "transparent",
+    padding: 10,
+    borderRadius: 5,
 
+    resizeMode: "contain",
   },
   container: {
     flex: 1,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "transparent",
     paddingTop: 50,
+  },
+  darkContainer: {
+    backgroundColor: "#121212",
   },
   chatContainer: {
     flex: 1,
     padding: 10,
-    backgroundColor: "#fff", // Light mode background color
+    backgroundColor: "transparent",
   },
   darkChatContainer: {
-    backgroundColor: "#121212", // Dark mode background color
+    backgroundColor: "#1e1e1e",
   },
   topButtons: {
     flexDirection: "row",
-    justifyContent: "flex-start", // Align buttons to the left
+    justifyContent: "flex-start",
     alignItems: "center",
     padding: 10,
-    backgroundColor: "#f5f5f5", // Matches container background
+    backgroundColor: "transparent",
   },
   chatBox: {
     flexGrow: 1,
@@ -208,8 +214,8 @@ const styles = StyleSheet.create({
   },
   userMessage: {
     alignSelf: "flex-end",
-    backgroundColor: "transparent",
-    color: " #121212 ",
+    backgroundColor: "#3c3c3c",
+    color: "#fff",
   },
   botMessage: {
     alignSelf: "flex-start",
@@ -223,6 +229,9 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     backgroundColor: "#fff",
   },
+  darkInputContainer: {
+    backgroundColor: "#222",
+  },
   input: {
     flex: 1,
     height: 40,
@@ -232,7 +241,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   darkInput: {
-    backgroundColor: "#222",
+    backgroundColor: "#333",
     color: "#fff",
     borderColor: "#444",
   },
@@ -247,33 +256,32 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
   },
-  sendButtonText: {
-    color: "#888",
-  },
-  clearButton: {
-    marginLeft: 5,
-    backgroundColor: "transparent",
-    padding: 10,
-    borderRadius: 10,
-    cursor: "pointer",
-  },
-  clearButtonText: {
-    color: "#888",
-  },
   typingIndicator: {
     color: "#888",
     fontStyle: "italic",
     marginVertical: 5,
   },
+  footerText: {
+    color: "#444",
+    textAlign : "center",
+    alignItems : "center",
+    justifyContent : "center",
+    
+  },
+  darkFooterText: {
+    color: "#ccc",
+  },
+
+  darkFooter: {
+    backgroundColor: "#121212",
+  },
   footer: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "transparent",
+    backgroundColor: "#f5f5f5",
     justifyContent: "space-between",
     padding: 10,
-  
   },
-  footerText: {
-    color: "#444",
-  },
+
+
 });
