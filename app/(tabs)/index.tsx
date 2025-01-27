@@ -10,6 +10,7 @@ import {
   FlatList,
   KeyboardAvoidingView,
   Switch,
+  Image,
 } from "react-native";
 import axios from "axios";
 import { black } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
@@ -43,7 +44,7 @@ export default function App() {
       console.error("Error connecting to the backend:", error);
       setMessages((prevMessages) => [
         ...prevMessages,
-        { text: "Error communicating with the server.", sender: "bot" },
+        { text: "Error communicating with the server", sender: "bot" },
       ]);
       setIsTyping(false);
     }
@@ -90,13 +91,19 @@ export default function App() {
   return (
     
       <KeyboardAvoidingView style={styles.container} behavior="padding">
-        {/* Top-left buttons container */}
+     
         <View style={styles.topButtons}>
           <TouchableOpacity onPress={clearChat} style={styles.clearButton}>
-            <Text style={styles.clearButtonText}>Clear</Text>
+          <Image 
+          source={require('./')} // Replace with the actual path to your image
+          style={styles.clearButtonImage} 
+        />
+
+
+            
           </TouchableOpacity>
-          <View style={styles.darkModeContainer}>
-            <Text style={styles.footerText}></Text>
+          <View style={styles.darkModeContainer} >
+            <Text style={styles.footerText}>7 JUNE</Text>
             <Switch
               value={isDarkMode}
               onValueChange={toggleDarkMode}
@@ -143,7 +150,13 @@ export default function App() {
             onSubmitEditing={sendMessage}
           />
           <TouchableOpacity onPress={sendMessage} style={styles.sendButton}>
-            <Text style={styles.sendButtonText}>Send</Text>
+
+
+          <Image 
+          source={require('/home/7june/AndroidStudioProjects/sevenjune/sevenjune/assets/images/send.png')} // Replace with the actual path to your image
+          style={styles.sendButtonImage} 
+        />
+
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
@@ -152,6 +165,18 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  sendButtonImage :{
+    width: 24, 
+    height: 24, 
+    resizeMode: 'contain', 
+
+  },
+  clearButtonImage :{
+    width: 24, 
+    height: 24, 
+    resizeMode: 'contain', 
+
+  },
   container: {
     flex: 1,
     backgroundColor: "#f5f5f5",
@@ -183,8 +208,8 @@ const styles = StyleSheet.create({
   },
   userMessage: {
     alignSelf: "flex-end",
-    backgroundColor: "#0084ff",
-    color: "#fff",
+    backgroundColor: "transparent",
+    color: " #121212 ",
   },
   botMessage: {
     alignSelf: "flex-start",
