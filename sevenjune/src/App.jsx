@@ -1,14 +1,11 @@
-
-import index from "./components/index";
-import './App.css';
+import Main from "./components/Main.jsx"; // use relative path (not "src/...") unless you set up aliases
+import "./App.css";
 
 function App() {
   return (
     <div>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <main >
-        <inedx />
-      </main>
+      {/* meta tags should be in index.html, not inside App */}
+      <Main />
     </div>
   );
 }
