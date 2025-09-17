@@ -1,67 +1,59 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-function ComingSoon({
-  text = "COMING SOON",
-  speed = 120,
-  blink = true,
-  className = "",
-}) {
-  const [display, setDisplay] = useState("");
-  const [index, setIndex] = useState(0);
 
-  useEffect(() => {
-    let mounted = true;
-    if (index < text.length && mounted) {
-      const t = setTimeout(() => {
-        setDisplay((d) => d + text.charAt(index));
-        setIndex((i) => i + 1);
-      }, speed);
-
-      return () => clearTimeout(t);
-    }
-    return () => {
-      mounted = false;
-    };
-  }, [index, text, speed]);
-
-  return (
-    <div
-      className={`flex items-center justify-center min-h-[120px] p-6 ${className}`}
-      aria-live="polite"
-      aria-atomic="true"
-    >
-      <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-widest uppercase">
-        <span>{display}</span>
-        <span
-          aria-hidden="true"
-          className={`ml-1 inline-block h-8 align-middle ${
-            blink ? "animate-blink" : ""
-          }`}
-        >
-          |
-        </span>
-      </h1>
-
-      <style>{`
-        @keyframes blink {
-          0% { opacity: 1 }
-          50% { opacity: 0 }
-          100% { opacity: 1 }
-        }
-        .animate-blink {
-          animation: blink 1s step-start infinite;
-        }
-      `}</style>
-    </div>
-  );
-}
+    
 
 export default function Main() {
   return (
     <section id="Main">
-      <img src="./logo.png" alt="logo" />
 
-      <ComingSoon />
+
+<header>
+  <a href="#projects"><h5 className="gradient-text">PROJECTS</h5></a>
+  <a href="#courses"><h5 className="gradient-text">COURSES</h5></a>
+  <a href="#statistics"><h5 className="gradient-text">STATISTICS</h5></a>
+</header>
+
+
+
+      
+      <h1 className="gradient-text" style={{ fontSize: '5rem' }}>SEVEN JUNE</h1>
+      <h2 className="gradient-text">AI COMPANY</h2>
+      <p>
+        SEVEN JUNE, a community and organization dedicated to AI Engineering, building powerful models,  
+        and creating scalable APIs that empower developers, learners, and innovators worldwide. <br /> <br />
+
+What We Do <br /> 
+AI Engineering – Build state-of-the-art models in NLP, Computer Vision, Generative AI, and beyond. <br />
+APIs for Builders – Create and share APIs so developers can quickly integrate AI into their apps. <br />
+Collaboration Hub – Share ideas, start projects, and work with like-minded engineers. <br />
+Learn AI From Scratch – Beginner-friendly tutorials, courses, and hands-on guides.
+
+
+      </p>
+
+<div className="content">
+
+
+<section className="cours" >
+  <h2 className="gradient-text">PROJECTS  </h2>
+  
+</section>
+
+<section className="cours" >
+  <h2 className="gradient-text">COURSES</h2>
+</section>
+
+<section className="cours">
+  <h2 className="gradient-text">STATISTICS </h2>
+</section>
+
+
+</div>
+
+
+
+
 
 
 
