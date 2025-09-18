@@ -133,6 +133,28 @@ export default function Main() {
         learners, and innovators worldwide.
       </p>
 
+
+
+<div className="pub">
+
+    <img src="https://kernel-technology.com/wp-content/uploads/2024/01/What-is-Artiificial-IntelligenceAI-1.webp" alt="ai" />
+    <img src="https://cdn.builtin.com/cdn-cgi/image/f=auto,fit=cover,w=1200,h=635,q=80/sites/www.builtin.com/files/2022-04/what-is-deep-learning.png" alt="dl" />
+    <img src="https://www.uplogictech.com/blog/blog/wp-content/uploads/2023/07/generative-ai.png" alt="genai" />
+    <img src="https://cdn.prod.website-files.com/63ca3d566352c27afde699d2/681b736b974cc0cfff723efd_How%20AI%20Agents%20Know%20When%20to%20Call%20APIs%20The%20Hidden%20Intelligence%20Behind%20Autonomous%20Action-p-1080.png" alt="api" />
+     <img src="https://d11qzsb0ksp6iz.cloudfront.net/assets/884cc2d834_thumbnail-llm.webp" alt="llm" />
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
       <div className="content">
         <section id="projects">
           <h2 className="gradient-text">PROJECTS</h2>
