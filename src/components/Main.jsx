@@ -25,15 +25,19 @@ ChartJS.register(
 
 export default function Main() {
   const [statsData, setStatsData] = useState({
-    labels: ["GitHub Stars", "GitHub Forks", "GitHub Watchers"],
+    labels: ["Stars", "Forks", "Watchers", "Followers", "Contrb"],
     datasets: [
       {
-        label: "GitHub Stats",
-        data: [0, 0, 0],
+        
+        data: [0, 0, 0, 0, 0],
         backgroundColor: "rgba(54, 162, 235, 0.2)",
         borderColor: "rgba(187, 105, 136, 1)",
         pointBackgroundColor: "rgba(236, 160, 207, 1)",
         pointBorderColor: "#fff",
+        tension: 0.4,
+        fill: true,
+        pointRadius: 6,
+        pointHoverRadius: 8,
       },
     ],
   });
@@ -43,6 +47,10 @@ export default function Main() {
       try {
         const username = "sevenjuneAI";
         const headers = {}; // Add { Authorization: "token YOUR_GITHUB_TOKEN" } if rate limited
+
+        // Fetch user info for followers
+        const userRes = await axios.get(`https://api.github.com/users/${username}`, { headers });
+        const followers = userRes.data.followers || 0;
 
         // Fetch all repos
         const reposRes = await axios.get(
@@ -54,23 +62,30 @@ export default function Main() {
         let totalStars = 3;
         let totalForks = 5;
         let totalWatchers = 100;
+        let totalContributions = 4;
+        
 
         repos.forEach((repo) => {
           totalStars += repo.stargazers_count;
           totalForks += repo.forks_count;
           totalWatchers += repo.watchers_count;
+          totalContributions += repo.contributors_url ? 1 : 0; 
         });
 
         setStatsData({
-          labels: ["GitHub Stars", "GitHub Forks", "GitHub Watchers"],
+          labels: [" Stars", "Forks", "Watchers", "Followers", "Contrb"],
           datasets: [
             {
-              label: "GitHub Stats",
-              data: [totalStars, totalForks, totalWatchers],
+              label: "GitHub ",
+              data: [totalStars, totalForks, totalWatchers, followers, totalContributions],
               backgroundColor: "rgba(54, 162, 235, 0.2)",
               borderColor: "rgba(187, 105, 136, 1)",
               pointBackgroundColor: "rgba(236, 160, 207, 1)",
               pointBorderColor: "#fff",
+              tension: 0.4,
+              fill: true,
+              pointRadius: 6,
+              pointHoverRadius: 8,
             },
           ],
         });
@@ -83,32 +98,28 @@ export default function Main() {
   }, []);
 
   const statsOptions = {
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {
-    legend: { display: true, position: "top" },
-    title: { display: true, text: "GitHub Statistics" },
-  },
-  scales: {
-    r: {
-      beginAtZero: true,
-      min: 0,        // minimum value of the scale
-      max: 1000,      // maximum value of the scale
-      ticks: {
-        stepSize: 100, // value difference between each line
-        color: "#8d5353ff",
-        font: { size: 8 },
-      },
-      grid: {
-        color: "#aaa", // color of circular grid lines
-      },
-      pointLabels: {
-        font: { size:12 }, // size of labels around the chart
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: {
+      duration: 1500,
+      easing: "easeInOutCubic",
+    },
+    
+    scales: {
+      r: {
+        beginAtZero: true,
+        min: 0,
+        max: 1000,
+        ticks: {
+          stepSize: 100,
+          color: "#8d5353ff",
+          font: { size: 8 },
+        },
+        grid: { color: "#aaa" },
+        pointLabels: { font: { size: 12 } },
       },
     },
-  },
-};
-
+  };
   return (  
     <section id="Main">
       <header>
@@ -156,12 +167,32 @@ export default function Main() {
 
 
       <div className="content">
-        <section id="projects">
+        <section id="projects" className="cours">
           <h2 className="gradient-text">PROJECTS</h2>
           Share your ideas on our GitHub discussion, and our team will work on
           them. The best projects will be featured on the official SEVEN JUNE
           website.
+
+<br />
+
+<div className="p">
+  <a href="https://github.com/sevenjunebaby/RAG">
+  <img src="https://kanerika.com/wp-content/uploads/2025/04/RAG-Thumbnail.jpg" alt="rag" /> 
+  </a>
+  
+  <a href="https://github.com/sevenjunebaby/PostClustering">
+  <img src="https://online.keele.ac.uk/wp-content/uploads/2023/07/data-clustering.jpg" alt="cluster" />
+   </a>
+  
+</div>
+
+
+
         </section>
+
+
+
+
 
         <section className="cours" id="courses">
           <h2 className="gradient-text">📖 COURSES</h2>
@@ -235,12 +266,20 @@ export default function Main() {
           <p>ʀᴇꜰᴇʀᴇɴᴄᴇ ✦ ꜱᴛᴀɴꜰᴏʀᴅ ᴜɴɪᴠᴇʀꜱɪᴛʏ</p>
         </section>
 
-        <section className="content" id="statistics">
-         
-          <div style={{ width: "600px", height: "600px", margin: "0 auto"  }}>
+
+
+
+
+        <section  id="statistics" className="stats">
+          
+          <div className="graph"   >
             <Radar data={statsData} options={statsOptions} />
           </div>
         </section>
+
+
+
+
       </div>
 
       <footer>

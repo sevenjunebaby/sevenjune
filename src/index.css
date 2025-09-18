@@ -92,11 +92,7 @@ header a {
   transform: scale(1.2);
 }
 
-/* Code font */
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+
 .content{
   
   justify-content: center;
@@ -130,6 +126,7 @@ code {
 .pdf-thumbnail {
   width: 200px;
   height: auto;
+  padding: 0px;
   border-radius: 10px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.2);
   cursor: pointer;
@@ -181,6 +178,45 @@ code {
 
 
 
+.stats{
+  display: flex;
+   text-align: center;
+  align-items: center;
+  justify-content: center;
+  
+  
+}
+
+.graph{
+  width: 600px;
+  height: 600px;
+  margin: 0 auto;
+ padding: 0 auto;
+
+}
+
+
+.p {
+  display: flex;           /* Arrange images in a row */
+  flex-wrap: wrap;         /* Wrap to next line if needed */
+  gap: 20px;               /* Space between images */
+  justify-content: center; /* Center the images horizontally */
+  padding: 10px;           /* Optional padding inside container */
+}
+.p img {
+  width: 400px;
+  height: 200px;
+  padding: 0;
+  margin: 0;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease; /* smooth transition */
+}
+
+.p img:hover {
+  transform: scale(1.05); /* slightly enlarge on hover */
+}
 
 
 
