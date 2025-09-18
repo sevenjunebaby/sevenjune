@@ -64,18 +64,20 @@ export default function Main() {
       <h1 className="gradient-text" style={{ fontSize: "5rem" }}>SEVEN JUNE</h1>
       <h2 className="gradient-text">AI COMPANY</h2>
       <p>
-        SEVEN JUNE, a community and organization dedicated to AI Engineering, building powerful models,  
+       community and organization dedicated to AI Engineering, building powerful models,  
         and creating scalable APIs that empower developers, learners, and innovators worldwide. <br /> <br />
-        <b>What We Do</b> <br /> 
-        AI Engineering – Build state-of-the-art models in NLP, Computer Vision, Generative AI, and beyond. <br />
-        APIs for Builders – Create and share APIs so developers can quickly integrate AI into their apps. <br />
-        Collaboration Hub – Share ideas, start projects, and work with like-minded engineers. <br />
-        Learn AI From Scratch – Beginner-friendly tutorials, courses, and hands-on guides.
+       
       </p>
 
       <div className="content">
+
+
+
+
+        
         <section className="cours" id="projects">
           <h2 className="gradient-text">PROJECTS</h2>
+          Share your ideas on our GitHub discussion, and our team will work on them. The best projects will be featured on the official SEVEN JUNE website
         </section>
 
 
@@ -85,13 +87,67 @@ export default function Main() {
 
 
         <section className="cours" id="courses">
-          <h2 className="gradient-text">COURSES</h2>
-      
+  <div className="course-list">
+    <div >
+      <h3 className="gradient-text">AI</h3>
+      <a href="AI.pdf" target="_blank" rel="noopener noreferrer">
+        <img
+          src="AI.png"
+          alt="AI PDF"
+          className="pdf-thumbnail"
+        />
+      </a>
+    </div>
+
+    <div >
+      <h3 className="gradient-text">MACHINE LEARNING</h3>
+      <a href="machinelearning.pdf" target="_blank" rel="noopener noreferrer">
+        <img
+          src="MACHINELEARNING.png"
+          alt="ML 1 PDF"
+          className="pdf-thumbnail"
+        />
+      </a>
+    </div>
+
+    <div >
+      <h3 className="gradient-text">ML TIPS</h3>
+      <a href="machinelearning-tips&tricks.pdf" target="_blank" rel="noopener noreferrer">
+        <img
+          src="MACHINELEARNING1.png"
+          alt="ML 2 PDF"
+          className="pdf-thumbnail"
+        />
+      </a>
+    </div>
+
+<div >
+      <h3 className="gradient-text">DEEP LEARINING</h3>
+      <a href="deeplearning.pdf" target="_blank" rel="noopener noreferrer">
+        <img
+          src="DEEPLEARNING.png"
+          alt="DL PDF"
+          className="pdf-thumbnail"
+        />
+      </a>
+    </div>
+
+<div >
+      <h3 className="gradient-text">LLM</h3>
+      <a href="transformersllms.pdf" target="_blank" rel="noopener noreferrer">
+        <img
+          src="LLM.png"
+          alt="LLM PDF"
+          className="pdf-thumbnail"
+        />
+      </a>
+    </div>
 
 
+  </div>
+   <p> ʀᴇꜰᴇʀᴇɴᴄᴇ ✦ ꜱᴛᴀɴꜰᴏʀᴅ ᴜɴɪᴠᴇʀꜱɪᴛʏ</p>
+</section>
 
-          
-        </section>
 
 
 
@@ -122,7 +178,7 @@ export default function Main() {
             </a>
           </div>
         </div>
-        <p> ✦ ᴡɪꜱꜱᴀʟ ʏᴀʜɪᴀ</p>
+        <p> ꜰᴏᴜɴᴅᴇʀ ✦ ᴡɪꜱꜱᴀʟ ʏᴀʜɪᴀ</p>
       </footer>
     </section>
   );

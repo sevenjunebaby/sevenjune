@@ -103,16 +103,43 @@ code {
 
 }
 .cours {
-  
   border: 2px;
   border-radius: 15px;
   text-align: center;
   align-items: center;
-
   margin:10px;
   padding: 60px; 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
+
+.course-list {
+   margin-bottom: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;       /* Wrap items to next line if screen is small */
+  gap: 1.5rem;           /* Space between course items */
+  justify-content: center; /* Center the items horizontally */
+}
+
+
+
+
+
+
+.pdf-thumbnail {
+  width: 200px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.pdf-thumbnail:hover {
+  transform: scale(1.05);
+}
+
+
+
 
 
 
