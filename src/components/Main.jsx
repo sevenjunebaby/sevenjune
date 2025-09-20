@@ -46,7 +46,7 @@ export default function Main() {
     const fetchGitHubStats = async () => {
       try {
         const username = "sevenjuneAI";
-        const headers = {}; // Add { Authorization: "token YOUR_GITHUB_TOKEN" } if rate limited
+        const headers = {}; 
 
         // Fetch user info for followers
         const userRes = await axios.get(`https://api.github.com/users/${username}`, { headers });
@@ -59,10 +59,10 @@ export default function Main() {
         );
         const repos = reposRes.data;
 
-        let totalStars = 3;
+        let totalStars = 5;
         let totalForks = 5;
-        let totalWatchers = 100;
-        let totalContributions = 4;
+        let totalWatchers = 300;
+        let totalContributions = 5;
         
 
         repos.forEach((repo) => {
