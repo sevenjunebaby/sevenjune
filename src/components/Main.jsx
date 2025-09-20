@@ -137,7 +137,7 @@ export default function Main() {
       <h1 className="gradient-text" style={{ fontSize: "5rem" }}>
         SEVEN JUNE
       </h1>
-      <h2 className="gradient-text">AI COMPANY</h2>
+      <h2 className="gradient-text">AI COMMUNITY</h2>
       <p>
         Community and organization dedicated to AI Engineering, building
         powerful models, and creating scalable APIs that empower developers,
