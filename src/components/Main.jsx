@@ -300,12 +300,10 @@ export default function Main() {
             <a href="https://github.com/sevenjuneAI">
               <img src="github.png" alt="github" className="cnt-img" />
             </a>
-            <a href="https://www.youtube.com/@sevenjunebaby">
-              <img src="youtube.png" alt="youtube" className="cnt-img" />
-            </a>
+            
           </div>
         </div>
-        <p>ꜰᴏᴜɴᴅᴇʀ ✦ ᴡɪꜱꜱᴀʟ ʏᴀʜɪᴀ</p>
+        <p>Happy to visit our community !</p>
       </footer>
     </section>
   );
