@@ -122,7 +122,12 @@ export default function Main() {
   };
   return (  
     <section id="Main">
+
       <header>
+        
+      <img className="logo" src="logo.png" alt="" />
+
+       <div className="a1">
         <a href="#projects">
           <h5 className="gradient-text">PROJECTS</h5>
         </a>
@@ -131,8 +136,12 @@ export default function Main() {
         </a>
         <a href="#statistics">
           <h5 className="gradient-text">STATISTICS</h5>
-        </a>
+        </a></div>
+
+
       </header>
+
+
 
       <h1 className="gradient-text" style={{ fontSize: "5rem" }}>
         SEVEN JUNE

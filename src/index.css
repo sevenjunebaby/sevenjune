@@ -42,17 +42,27 @@ body {
   background-clip: text; /* for Firefox */
   color: transparent;
 }
-header{
+header {
   display: flex;
-  justify-content: flex-end ;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 0px; 
+  ;
 }
-header h5:hover{
-  cursor: pointer;
+
+.a1 {
+  display: flex;
   
 }
+
 header a {
   text-decoration: none; 
   color: inherit; 
+}
+.logo {
+  width: 150px;
+  height: 100px;
+  object-fit: contain;
 }
 
 
@@ -194,6 +204,7 @@ header a {
  padding: 0 auto;
 
 }
+
 
 
 .p {
