@@ -176,7 +176,7 @@ export default function Main() {
 
 
       <div className="content">
-        <section id="projects" className="cours">
+        <section id="projects" >
           <h2 className="gradient-text">PROJECTS</h2>
           Share your ideas on our GitHub discussion, and our team will work on
           them. The best projects will be featured on the official SEVEN JUNE

@@ -75,14 +75,14 @@ header a {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap; /* allow wrapping on small screens */
-  gap: 10px;
-  margin-top: 20px;
+  gap: 0px;
+  margin-top: 0px;
 }
 
 .cnt {
   display: flex;
   flex-wrap: wrap;
-  gap: 25px;
+  gap: 0px;
 }
 
 .cnt-a {
@@ -231,7 +231,6 @@ header a {
 
 
 
-
 /* Tablet and smaller */
 @media (max-width: 768px) {
   h1 {
@@ -244,11 +243,9 @@ header a {
   }
 }
 footer {
-  
   bottom: 0;
   left: 0;
   width: 100%;
-  
   color: #d6bbbb;
   text-align: center;
   padding: 10px;
